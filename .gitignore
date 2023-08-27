@@ -1,0 +1,38 @@
+# Archivos y directorios generados por el sistema
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db.sqlite3
+
+# Directorio virtual environment (venv)
+venv/
+
+# Directorio generado por IDEs y editores
+.vscode/
+
+# Archivo de configuración local (configuraciones personales)
+*.env
+
+# Archivos de logs
+*.log
+
+# Archivos compilados
+*.pyc
+
+# Archivos de respaldos
+*.bak
+*.swp
+*.~*
+
+# Directorio de migraciones
+/migrations/
+
+# Archivos de configuración locales
+*.settings
+
+# Carpeta de medios (cargados por usuarios)
+/media/
+
+# Carpeta estática (archivos estáticos recolectados)
+/static/
