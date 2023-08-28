@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_delete
 from django.dispatch import receiver
 
 from partners.models import Partner
@@ -70,6 +70,16 @@ def update_stock(sender, instance, **kwargs):
         qty = current_qty - previous_qty
         if instance.transaction_type == 'outcome':
             qty *= -1
+
+    instance.product.stock += qty
+    instance.product.save()
+
+
+@receiver(post_delete, sender=Transaction)
+def update_stock_on_transaction_delete(sender, instance, **kwargs):
+    qty = instance.quantity
+    if instance.transaction_type == 'income':
+        qty *= -1
 
     instance.product.stock += qty
     instance.product.save()
