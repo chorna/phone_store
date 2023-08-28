@@ -34,6 +34,7 @@ AUTH_USER_MODEL = 'employees.Employees'
 LOCAL_APPS = [
     'employees',
     'partners',
+    'products',
 ]
 
 DJANGO_APPS = [
