@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+    <div id="app">
+        <h1>Listado de Productos</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% verbatim %}
+                <tr v-for="product in products" :key="product.id">
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                </tr>
+                {% endverbatim %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    products: []
+                };
+            },
+            created() {
+                this.fetchProducts();
+            },
+            methods: {
+                async fetchProducts() {
+                    try {
+                        const response = await fetch('/api/products/');
+                        const data = await response.json();
+                        this.products = data;
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+{% endblock %}
